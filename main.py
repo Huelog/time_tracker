@@ -1,6 +1,7 @@
 import csv
 import argparse
 from datetime import datetime as dt
+from config import Config
 
 
 def parse_arguments():
@@ -13,7 +14,7 @@ def parse_arguments():
 def calculate_time(start_time, end_time):
     time_diff = dt.strptime(end_time, '%H:%M') - dt.strptime(start_time, '%H:%M')
     print(str(time_diff)[:-3])
-    with open("times.csv", 'a+', newline='') as file:
+    with open(Config.LOG_FILE, 'a+', newline='') as file:
         fields = [dt.today().strftime("%d/%m/%Y"), start_time, end_time, str(time_diff)[:-3]]
         writer = csv.writer(file)
         writer.writerow(fields)
